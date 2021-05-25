@@ -17,11 +17,11 @@ object Main {
     val persons = jsonHandler.getPersons("data/persons.json")
     var usersList = new ListBuffer[User]()
 
-    val validClients = clients.getValidatedClients()
-    val validPersons = persons.getValidatedPersons()
+    val validClients = clients.validate()
+    val validPersons = persons.validate()
 
-    usersList = clients.toUsersList
-    usersList.addAll(persons.toUsersList())
+    usersList = clients.toUsers
+    usersList.addAll(persons.toUsers())
 
     val filteredUsersList = usersList.filter(user => user.filterByRequest(request(0))).toList
 

@@ -56,12 +56,12 @@ object Helpers {
   }
 
   implicit class ClientListHelper (clientList: List[Client]) {
-    def getValidatedClients(): List[Client] = {
+    def validate(): List[Client] = {
       clientList.filter(client => client.hasValidPhoneAndEmail)
         .filter((client => client.hasValidAge))
     }
 
-    def toUsersList: ListBuffer[User] = {
+    def toUsers(): ListBuffer[User] = {
       var usersList: ListBuffer[User] = new ListBuffer[User]()
       clientList.map(client => usersList += client)
       usersList
@@ -69,12 +69,12 @@ object Helpers {
   }
 
   implicit class PersonListHelper (personList: List[Person]) {
-    def getValidatedPersons(): List[Person] = {
+    def validate(): List[Person] = {
       personList.filter(person => person.hasValidPhoneAndEmail)
         .filter((person => person.hasValidAge))
     }
 
-    def toUsersList(): ListBuffer[User] = {
+    def toUsers(): ListBuffer[User] = {
       var usersList: ListBuffer[User] = new ListBuffer[User]()
       personList.map(person => usersList += person)
       usersList
