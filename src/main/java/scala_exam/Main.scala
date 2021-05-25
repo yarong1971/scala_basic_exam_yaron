@@ -2,7 +2,7 @@ package scala_exam
 
 import scala_exam.models.User
 import scala_exam.utils.{ExcelHandler, JsonHandler}
-import scala_exam.utils.Helpers.{ClientHelper, ClientListHelper, PersonListHelper, PersonValidor, StringHelper}
+import scala_exam.utils.Helpers.{ClientHelper, ClientListHelper, PersonListHelper, PersonHelper}
 
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
@@ -18,10 +18,10 @@ object Main {
     var usersList = new ListBuffer[User]()
 
     val validClients = clients.filter(client => client.hasValidPhoneAndEmail)
-      .filter((client => client.hasValidAge))
+                              .filter((client => client.hasValidAge))
 
     val validPersons = persons.filter(person => person.hasValidPhoneAndEmail)
-      .filter(person => person.hasValidAge)
+                              .filter(person => person.hasValidAge)
 
     usersList = clients.toUsersList
     usersList.addAll(persons.toUsersList())

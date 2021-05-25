@@ -1,10 +1,7 @@
 package scala_exam.utils
 
-import scala_exam.models.{Client, Person, Request, User}
-
-import java.io.{BufferedWriter, FileOutputStream, FileWriter}
+import scala_exam.models.{Client, Person, User}
 import scala.collection.mutable.ListBuffer
-import scala.util.matching.Regex
 
 object Helpers {
   implicit class StringHelper(string: String) {
@@ -39,7 +36,7 @@ object Helpers {
     }
   }
 
-  implicit class PersonValidor(person: Person) {
+  implicit class PersonHelper(person: Person) {
     def hasValidPhoneAndEmail: Boolean = person.phone.isValidPhoneNumber() && person.email.isValidEmail()
     def hasValidAge: Boolean = person.age.isNaturalNumber()
     def toClient() : Client = {
@@ -73,12 +70,4 @@ object Helpers {
       usersList
     }
   }
-
-  /*implicit class UserListHelper (userList: List[User]){
-    def saveToFile(filename: String, users: List[User]): Unit = {
-      val writer = new BufferedWriter(new FileWriter(filename)
-      users.map(user => ))
-      writer.close()
-    }
-  }*/
 }
