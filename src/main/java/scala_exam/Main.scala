@@ -22,6 +22,6 @@ object Main {
 
     usersList = clients.toUsers
     usersList.addAll(persons.toUsers())
-    usersList.toList.filterList(request).print(request)
+    usersList.toList.filterByRequest(request).print(request)
   }
 }

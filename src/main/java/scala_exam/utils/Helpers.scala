@@ -83,17 +83,18 @@ object Helpers {
   }
 
   implicit class UserListHelper (userList: List[User]) {
-    def filterList(request: Request): List[User] = {
+    def filterByRequest(request: Request): List[User] = {
       userList.filter(user => user.filterByRequest(request))
     }
 
     def print(request: Request): Unit = {
-      println("filter details: age between " + request.minAge + " to " + request.maxAge +
-                              "\n\t\t\t\tgender is '" + request.gender + "'" +
-                              "\n\t\t\t\tname starts with '" + request.prefixName + "'" +
-                              "\n\t\t\t\tmarital status is '" + request.maritalStatus + "' (person only)" +
-                              "\n\t\t\t\tnumber of children is more than " + request.numberOfChildren + " (person only)" +
-                              "\n--------------------------------------------------------------------------------------")
+      println("--------------------------------------------------------------------------------------")
+      println("filter details: age between " + request.minAge + " to " + request.maxAge)
+      println("\t\t\t\tgender is '" + request.gender + "'")
+      println("\t\t\t\tname starts with '" + request.prefixName + "'")
+      println("\t\t\t\tmarital status is '" + request.maritalStatus + "' (person only)")
+      println("\t\t\t\tnumber of children is more than " + request.numberOfChildren + " (person only)")
+      println("--------------------------------------------------------------------------------------")
       println("Users list filtered by request (" + userList.size + " users):")
       println("--------------------------------------------------------------------------------------")
       userList.zipWithIndex.foreach{case (user, index) => println("[%2d] %s".format((index + 1),user))}
