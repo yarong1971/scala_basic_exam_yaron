@@ -1,14 +1,12 @@
 package scala_exam.utils
 
 import org.apache.commons.collections4.IteratorUtils
-import org.apache.poi.hssf.usermodel.{HSSFSheet, HSSFWorkbook}
-import org.apache.poi.ss.usermodel.Cell
 import org.apache.poi.ss.usermodel.DataFormatter
 import org.apache.poi.xssf.usermodel.{XSSFSheet, XSSFWorkbook}
 import scala_exam.models.Client
 
 import java.io.{File, FileInputStream}
-import java.util.stream.{Collectors, StreamSupport}
+import java.util.stream.{StreamSupport}
 import scala.collection.mutable.ListBuffer
 import collection.JavaConverters._
 

@@ -17,18 +17,15 @@ object Main {
     val persons = jsonHandler.getPersons("data/persons.json")
     var usersList = new ListBuffer[User]()
 
-    val validClients = clients.filter(client => client.hasValidPhoneAndEmail)
-                              .filter((client => client.hasValidAge))
-
-    val validPersons = persons.filter(person => person.hasValidPhoneAndEmail)
-                              .filter(person => person.hasValidAge)
+    val validClients = clients.getValidatedClients()
+    val validPersons = persons.getValidatedPersons()
 
     usersList = clients.toUsersList
     usersList.addAll(persons.toUsersList())
 
     val filteredUsersList = usersList.filter(user => user.filterByRequest(request(0))).toList
 
-    println("The users list filtered by request is (" + filteredUsersList.size + " users):")
+    println("Users list filtered by request (" + filteredUsersList.size + " users):")
     filteredUsersList.foreach(user => println(user))
   }
 }

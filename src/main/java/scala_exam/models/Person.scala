@@ -2,7 +2,6 @@ package scala_exam.models
 
 import com.fasterxml.jackson.annotation.{JsonCreator, JsonProperty}
 import scala_exam.utils.Helpers._
-
 import java.io.BufferedWriter
 @JsonCreator
 case class   Person@JsonCreator()(@JsonProperty("age")var age:Int,
@@ -27,9 +26,5 @@ case class   Person@JsonCreator()(@JsonProperty("age")var age:Int,
       case Request (minAge, maxAge, gender, _, _, _) => this.age.isBetween(minAge,maxAge) && this.gender.toLowerCase() == gender.toLowerCase()
       case Request (_, _, _, _, _, _) => true
     }
-  }
-
-  override def writeToFile(writer: BufferedWriter): Unit = {
-
   }
 }

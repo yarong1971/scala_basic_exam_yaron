@@ -1,7 +1,7 @@
 package scala_exam.utils
 
 import com.fasterxml.jackson.core.`type`.TypeReference
-import com.fasterxml.jackson.databind.{ObjectMapper, SerializationFeature}
+import com.fasterxml.jackson.databind.{ObjectMapper}
 import scala_exam.models._
 
 import java.io.File

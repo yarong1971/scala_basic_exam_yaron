@@ -42,8 +42,4 @@ case class Client(var firstName: String = "",
         case Request (_, _, _, _, _, _) => true
       }
   }
-
-  override def writeToFile(writer: BufferedWriter): Unit = {
-
-  }
 }
