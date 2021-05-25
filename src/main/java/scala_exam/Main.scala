@@ -2,7 +2,7 @@ package scala_exam
 
 import scala_exam.models.User
 import scala_exam.utils.{ExcelHandler, JsonHandler}
-import scala_exam.utils.Helpers.{ClientHelper, ClientListHelper, PersonListHelper, PersonHelper}
+import scala_exam.utils.Helpers.{ClientHelper, ClientListHelper, PersonHelper, PersonListHelper, UserListHelper}
 
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
@@ -13,7 +13,7 @@ object Main {
     val excelHandler = ExcelHandler
 
     val clients = excelHandler.read("data/client.xlsx")
-    val request =  jsonHandler.getRequest("data/request.json")
+    val request =  jsonHandler.getRequest("data/request.json")(0)
     val persons = jsonHandler.getPersons("data/persons.json")
     var usersList = new ListBuffer[User]()
 
@@ -22,10 +22,6 @@ object Main {
 
     usersList = clients.toUsers
     usersList.addAll(persons.toUsers())
-
-    val filteredUsersList = usersList.filter(user => user.filterByRequest(request(0))).toList
-
-    println("Users list filtered by request (" + filteredUsersList.size + " users):")
-    filteredUsersList.foreach(user => println(user))
+    usersList.toList.filterList(request).print(request)
   }
 }
