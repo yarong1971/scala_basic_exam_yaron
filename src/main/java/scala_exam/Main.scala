@@ -9,21 +9,14 @@ import scala.io.Source
 
 object Main {
   def main(args: Array[String]): Unit = {
-    val jsonHandler = JsonHandler
-    val excelHandler = ExcelHandler
 
-
-
-    val clients = excelHandler.read("data/client.xlsx")
-    val request =  jsonHandler.getRequest("data/request.json")(0)
-    val persons = jsonHandler.getPersons("data/persons.json")
+    val clients = ExcelHandler.read("data/client.xlsx")
+    val request = JsonHandler.getRequest("data/request.json")(0)
+    val persons = JsonHandler.getPersons("data/persons.json")
     var usersList = new ListBuffer[User]()
 
-    val validClients = clients.validate()
-    val validPersons = persons.validate()
-
-    usersList = clients.toUsers()
-    usersList.addAll(persons.toUsers())
+    usersList = clients.validate().toUsers()
+    usersList.addAll(persons.validate().toUsers())
     usersList.toList.filterByRequest(request).print(request)
   }
 }
