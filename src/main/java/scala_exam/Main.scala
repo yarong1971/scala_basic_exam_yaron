@@ -12,6 +12,8 @@ object Main {
     val jsonHandler = JsonHandler
     val excelHandler = ExcelHandler
 
+
+
     val clients = excelHandler.read("data/client.xlsx")
     val request =  jsonHandler.getRequest("data/request.json")(0)
     val persons = jsonHandler.getPersons("data/persons.json")
@@ -20,7 +22,7 @@ object Main {
     val validClients = clients.validate()
     val validPersons = persons.validate()
 
-    usersList = clients.toUsers
+    usersList = clients.toUsers()
     usersList.addAll(persons.toUsers())
     usersList.toList.filterByRequest(request).print(request)
   }
