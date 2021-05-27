@@ -1,8 +1,8 @@
 package scala_exam.models
 
 import com.fasterxml.jackson.annotation.{JsonCreator, JsonProperty}
-import scala_exam.utils.Helpers._
-import java.io.BufferedWriter
+import scala_exam.helpers.IntHelper.IntExtension
+import scala.language.implicitConversions
 @JsonCreator
 case class   Person@JsonCreator()(@JsonProperty("age")var age:Int,
                                   @JsonProperty("name")var name: String,
@@ -16,9 +16,9 @@ case class   Person@JsonCreator()(@JsonProperty("age")var age:Int,
     (request.minAge > 0, request.maxAge > 0, request.gender != "", request.prefixName != "") match {
     case (true, true, true, true) => age.isBetween(request.minAge,request.maxAge) && gender.toLowerCase() == request.gender.toLowerCase() && name.startsWith(request.prefixName)
     case (false, true, true, true) => age <= request.maxAge && gender.toLowerCase() == request.gender.toLowerCase() && name.startsWith(request.prefixName)
+    case(false,true,true,false) => age <= request.maxAge && gender.toLowerCase() == request.gender.toLowerCase()
     case (false, true, false, true) => age <= request.maxAge && name.startsWith(request.prefixName)
     case (false, true, false, false) => age <= request.maxAge
-
     case (false, false, true, true) => gender.toLowerCase() == request.gender.toLowerCase() && name.startsWith(request.prefixName)
     case (false, false, true, false) => gender.toLowerCase() == request.gender.toLowerCase()
     case (false, false, false, true) => name.startsWith(request.prefixName)

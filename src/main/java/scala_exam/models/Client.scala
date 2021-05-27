@@ -1,8 +1,7 @@
 package scala_exam.models
 
-import scala_exam.utils.Helpers._
-
-import java.io.BufferedWriter
+import scala_exam.helpers.IntHelper.IntExtension
+import scala.language.implicitConversions
 
 case class Client(var firstName: String = "",
                   var lastName: String = "",
@@ -24,6 +23,8 @@ case class Client(var firstName: String = "",
       case (false, true, false, false, true, true) => age <= request.maxAge && maritalStatus.toLowerCase() == request.maritalStatus.toLowerCase() && numberOfChildren > request.numberOfChildren
       case (false, true, false, false, false, true) => age <= request.maxAge && numberOfChildren > request.numberOfChildren
       case (false, true, false, false, false, false) => age <= request.maxAge
+      case (false,true,true,false,true,true) => age <= request.maxAge && gender.toLowerCase() == request.gender.toLowerCase() && maritalStatus.toLowerCase() == request.maritalStatus.toLowerCase() && numberOfChildren > request.numberOfChildren
+      case(false,true,true,true,true,false) => age <= request.maxAge && gender.toLowerCase() == request.gender.toLowerCase() && firstName.startsWith(request.prefixName) && maritalStatus.toLowerCase() == request.maritalStatus.toLowerCase()
       case (false, false, true, true, true, true) => gender.toLowerCase() == request.gender.toLowerCase() && firstName.startsWith(request.prefixName) && maritalStatus.toLowerCase() == request.maritalStatus.toLowerCase() && numberOfChildren > request.numberOfChildren
       case (false, false, true, false, true, true) => gender.toLowerCase() == request.gender.toLowerCase() && maritalStatus.toLowerCase() == request.maritalStatus.toLowerCase() && numberOfChildren > request.numberOfChildren
       case (false, false, true, false, false, true) => gender.toLowerCase() == request.gender.toLowerCase() && numberOfChildren > request.numberOfChildren
