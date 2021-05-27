@@ -1,10 +1,10 @@
 [
   {
-    "min_age": "5",
+    "min_age": "",
     "max_age": "40",
-    "gender": "female",
-    "prefix_name": "Jo",
+    "gender": "",
+    "prefix_name": "",
     "Marital Status": "married",
-    "Number of Children": "2"
+    "Number of Children": "4"
   }
 ]

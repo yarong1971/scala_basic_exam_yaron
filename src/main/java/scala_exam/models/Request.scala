@@ -8,5 +8,4 @@ case class Request@JsonCreator()(@JsonProperty("min_age")minAge:Int,
                                  @JsonProperty("prefix_name")prefixName:String,
                                  @JsonProperty("Marital Status")maritalStatus:String,
                                  @JsonProperty("Number of Children")numberOfChildren:Int){
-
 }

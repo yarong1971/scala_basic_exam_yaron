@@ -1,10 +1,9 @@
 package scala_exam.utils
 
-import scala_exam.Main.getClass
-
 import java.io.FileNotFoundException
 import java.util.Properties
 import scala.io.Source
+
 
 object ApplicationHandler {
 

@@ -12,6 +12,8 @@ object Main {
     val clients = ExcelHandler.read(ApplicationHandler.clientsPath)
     val persons = JsonHandler.getPersons(ApplicationHandler.personsPath)
     val request = JsonHandler.getRequest(ApplicationHandler.requestPath).head
+
+    //request = request.ini
     var usersList = new ListBuffer[User]()
 
     usersList = clients.validate().toUsers()

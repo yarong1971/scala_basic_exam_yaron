@@ -13,18 +13,23 @@ case class   Person@JsonCreator()(@JsonProperty("age")var age:Int,
                                   @JsonProperty("address")var address: String) extends Serializable with User {
 
   override implicit def filterByRequest(request: Request): Boolean = {
-    request match {
-      case Request (minAge,maxAge, gender, prefix, _, _) => this.age.isBetween(minAge,maxAge) && this.gender.toLowerCase() == gender.toLowerCase() && this.name.startsWith(prefix)
-      case Request (_,maxAge, gender, prefix, _, _) => this.age <= maxAge && this.gender.toLowerCase() == gender.toLowerCase() && this.name.startsWith(prefix)
-      case Request (_, _, gender, prefix, _, _) => this.gender.toLowerCase() == gender.toLowerCase() && this.name.startsWith(prefix)
-      case Request (_, _, _, prefix, _, _) => this.name.startsWith(prefix)
-      case Request (minAge, _, gender, prefix, _, _) => this.age >= minAge && this.gender.toLowerCase() == gender.toLowerCase() && this.name.startsWith(prefix)
-      case Request (minAge, _, _, prefix, _, _) => this.age >= minAge && this.name.startsWith(prefix)
-      case Request (minAge, _, _, _, _, _) => this.age >= minAge
-      case Request (minAge, maxAge, _, prefix, _, _) => this.age.isBetween(minAge,maxAge) &&  this.name.startsWith(prefix)
-      case Request (minAge, maxAge, _, _, _, _) => this.age.isBetween(minAge,maxAge)
-      case Request (minAge, maxAge, gender, _, _, _) => this.age.isBetween(minAge,maxAge) && this.gender.toLowerCase() == gender.toLowerCase()
-      case Request (_, _, _, _, _, _) => true
+    (request.minAge > 0, request.maxAge > 0, request.gender != "", request.prefixName != "") match {
+    case (true, true, true, true) => age.isBetween(request.minAge,request.maxAge) && gender.toLowerCase() == request.gender.toLowerCase() && name.startsWith(request.prefixName)
+    case (false, true, true, true) => age <= request.maxAge && gender.toLowerCase() == request.gender.toLowerCase() && name.startsWith(request.prefixName)
+    case (false, true, false, true) => age <= request.maxAge && name.startsWith(request.prefixName)
+    case (false, true, false, false) => age <= request.maxAge
+
+    case (false, false, true, true) => gender.toLowerCase() == request.gender.toLowerCase() && name.startsWith(request.prefixName)
+    case (false, false, true, false) => gender.toLowerCase() == request.gender.toLowerCase()
+    case (false, false, false, true) => name.startsWith(request.prefixName)
+    case (false, false, false, false) => false
+    case (true, false, true, true) => age >= request.minAge && gender.toLowerCase() == request.gender.toLowerCase() && name.startsWith(request.prefixName)
+    case (true, false, true, false) => age >= request.minAge && gender.toLowerCase() == request.gender.toLowerCase()
+    case (true, false, false, true) => age >= request.minAge && name.startsWith(request.prefixName)
+    case (true, false, false, false) => age >= request.minAge
+    case (true, true, false, true) => age.isBetween(request.minAge,request.maxAge) && name.startsWith(request.prefixName)
+    case (true, true, false, false) => age.isBetween(request.minAge,request.maxAge)
+    case (true, true, true, false) => age.isBetween(request.minAge,request.maxAge) && gender.toLowerCase() == request.gender.toLowerCase()
     }
   }
 }
